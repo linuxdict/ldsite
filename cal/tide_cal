@@ -1,0 +1,10 @@
+# the scripts to tidy the csv
+# I am not good at scripts ... sorry
+# Edy.liu
+# 2011-01-05
+
+cat test.csv |egrep "E,E|WO,WO|L,L|-"|egrep -v "Karen|TBA|GMT|andrew.chan|^DBA" > my_cool.csv
+
+awk -F"," -v ct=`date +%d-%m` '{split($_,a,",");for (i in a) {if(a[i]==ct) print i}}' my_cool.csv  > col
+
+awk -F"," -v "mycol=`cat col`" '{print $1","$(mycol-1)","$mycol","$(mycol+1)","$(mycol+2)","$(mycol+3)","$(mycol+4)","$(mycol+5)","$(mycol+6)}' my_cool.csv  > my_new.csv
